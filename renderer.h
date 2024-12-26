@@ -50,7 +50,6 @@ private:
 	inline void LightRay(int x, int y, int z, int n, float decay, 
 			const float* dens, unsigned char* intensity);
 
-
 	void InitGL();
 
 	// if _isDrawSliceOutline==true, the outline of the slices will be drawn as well
@@ -66,15 +65,12 @@ public:
 	void SetLightPostion(Eigen::Vector3f &pos);
 	void SetRendering(bool isRendering);
 	void SetSliceOutline(bool isDrawSliceOutline);
-
-
 	void FillTexture();		// generate texture from smoke density 
 	void Render();					// draw the volume
 	// draw the outline of the cube
 	void DrawCube();
 	void DrawLight();
 	void DrawVolumeData();
-
 };
 
 
