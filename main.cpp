@@ -3,11 +3,6 @@
 
 #define WINDOW_NAME		 "Smoke3D"
 
-//#define VERTEX_PROG_NAME1   "backface.vert"
-//#define FRAGMENT_PROG_NAME1 "backface.frag"
-//#define VERTEX_PROG_NAME2   "raycasting.vert"
-//#define FRAGMENT_PROG_NAME2 "raycasting.frag"
-
 // Window management
 	std::string _windowName;
 	std::stringstream _titleInfo;
@@ -97,11 +92,8 @@ static void keyboard(GLFWwindow * window, int key, int scancode,int action, int 
 
 				// Set perspective projection
 				gluPerspective(_FOV, _aspect, _nearClip, _farClip);
-
 				glViewport(0, 0, _winX, _winY);
-
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 				_object->Reset();
 				break;
 			case GLFW_KEY_LEFT_CONTROL:
@@ -188,7 +180,7 @@ int main(int argc, char **argv) {
 	Fluid* object = new Fluid;
 
 	#ifdef DEBUG_LEVEL
-	std::cout << __FILE__ << " " << __FUNCTION__ << std::endl;
+		std::cout << __FILE__ << " " << __FUNCTION__ << std::endl;
 	#endif
 
 	glfwGetWindowSize(_windowHandle, &_winX, &_winY);
@@ -197,21 +189,14 @@ int main(int argc, char **argv) {
 	_nearClip = 0.1f;
 	_farClip = 100.0f;
 
-#if 1
 	glEnable(GL_DEPTH_TEST);
-#else
-	glDisable(GL_DEPTH_TEST);
-#endif
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	// Set perspective projection
 	gluPerspective(_FOV, _aspect, _nearClip, _farClip);
-
 	glViewport(0, 0, _winX, _winY);
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	object->RegisterParentWindow(_windowHandle);
 	object->Reset();
 	_object = object;
@@ -230,19 +215,13 @@ int main(int argc, char **argv) {
 		_nearClip = 0.1f;
 		_farClip = 100.0f;
 
-	#if 1
 		glEnable(GL_DEPTH_TEST);
-	#else
-		glDisable(GL_DEPTH_TEST);
-	#endif
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 
 		// Set perspective projection
 		gluPerspective(_FOV, _aspect, _nearClip, _farClip);
-
 		glViewport(0, 0, _winX, _winY);
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		_object->SimulateStep();
