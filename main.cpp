@@ -20,10 +20,7 @@
 	
 	double _prevCursorX, _prevCursorY;
 
-	Object** _objects;
-	int _objectNo;
-	int _maxObjectNo;
-	int _activeObj;
+	Object* _object;
 	double _startTime;
 	double _stopTime;
 	double _elapsedTime;
@@ -68,8 +65,7 @@ static void resize(GLFWwindow *window, int x,int y)
 	_winX = x;
 	_winY = y;
 	
-	for(int i = 0 ; i < _objectNo ; i++)
-		_objects[i]->Resize(window, x, y);
+	_object->Resize(window, x, y);
 }
 
 static void keyboard(GLFWwindow * window, int key, int scancode,int action, int mods)		
@@ -106,8 +102,7 @@ static void keyboard(GLFWwindow * window, int key, int scancode,int action, int 
 
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-				for(int i = 0 ; i < _objectNo ; i++)
-					_objects[i]->Reset();
+				_object->Reset();
 				break;
 			case GLFW_KEY_LEFT_CONTROL:
 				_isCtrlPressed = true;
@@ -122,7 +117,7 @@ static void keyboard(GLFWwindow * window, int key, int scancode,int action, int 
 		}
 
 	//route message to active object
-	_objects[_activeObj]->Keyboard(window, key, scancode, action, mods);
+	_object->Keyboard(window, key, scancode, action, mods);
 }
 
 static void mousebutton(GLFWwindow *window,int button,int action,int mods)	
@@ -131,17 +126,17 @@ static void mousebutton(GLFWwindow *window,int button,int action,int mods)
 	if(action == GLFW_PRESS) {
 		glfwGetCursorPos(window, &_prevCursorX, &_prevCursorY);
 	}
-	_objects[_activeObj]->MouseButton(window, button, action, mods);
+	_object->MouseButton(window, button, action, mods);
 }
 
 static void mousemotion(GLFWwindow *window, double x, double y)
 {
-	_objects[_activeObj]->MouseMotion(window, x, y);
+	_object->MouseMotion(window, x, y);
 }
 
 static void mousescroll(GLFWwindow *window, double x, double y)
 {
-	_objects[_activeObj]->MouseScroll(window, x, y);
+	_object->MouseScroll(window, x, y);
 }
 
 int main(int argc, char **argv) {
@@ -155,10 +150,7 @@ int main(int argc, char **argv) {
 	_winX = 1280;
 	_winY = 960;
 
-	_activeObj = -1;
-	_objectNo = 0;
-	_maxObjectNo = 100;
-	_objects = new Object*[_maxObjectNo];
+	_object = new Object;
 
 	_isCtrlPressed = _isLeftKeyPressed = _isMiddleKeyPressed = _isRightKeyPressed = false;
 	_isLightOn = true;
@@ -233,8 +225,7 @@ int main(int argc, char **argv) {
 
 	object->RegisterParentWindow(_windowHandle);
 	object->Reset();
-	_objects[_objectNo++] = object;
-	_activeObj++;
+	_object = object;
 	
 	while (!glfwWindowShouldClose(_windowHandle))
     {
@@ -264,10 +255,9 @@ int main(int argc, char **argv) {
 		glViewport(0, 0, _winX, _winY);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		for(int i = 0 ; i < _objectNo ; i++) {
-			_objects[i]->SimulateStep();
-			_objects[i]->Show();
-		}
+		
+		_object->SimulateStep();
+		_object->Show();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(_windowHandle);
