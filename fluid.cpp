@@ -396,26 +396,6 @@ void Fluid::Show()
 {
 	_renderer->FillTexture();
 	_renderer->Render();
-/*	
-	else {	//without rendering
-		Cube();
-		glBegin(GL_POINTS);
-		FOR_ALL_CELL {
-			if(!ALMOST_EQUAL(_density[_I(i,j,k)], 0) ) {
-				glVertex3f(((float)i/N-0.5)*2, ((float)j/N-0.5)*2, ((float)k/N-0.5)*2 );
-			}
-		} END_FOR
-		glEnd();
-
-		glPointSize(13.0f);
-		glBegin(GL_POINTS);
-		glColor4f(0.0f, 1.0f, 1.0f, 1.0f);
-		glVertex3f(_lightPos[0], _lightPos[1], _lightPos[2]);
-		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		glEnd();
-		glPointSize(1.0f);
-	}
-	*/
 }
 
 

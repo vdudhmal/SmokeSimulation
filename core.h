@@ -20,8 +20,6 @@
 #include <sstream>
 #include <iomanip>
 
-
-
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 #include <Eigen/Core>
