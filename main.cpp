@@ -81,12 +81,7 @@ static void keyboard(GLFWwindow * window, int key, int scancode,int action, int 
 				_aspect = (GLfloat)_winX / _winY;
 				_nearClip = 0.1f;
 				_farClip = 100.0f;
-
-				#if 1
-					glEnable(GL_DEPTH_TEST);
-				#else
-					glDisable(GL_DEPTH_TEST);
-				#endif
+				glEnable(GL_DEPTH_TEST);
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
 
