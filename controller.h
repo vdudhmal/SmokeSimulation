@@ -4,7 +4,6 @@
 #include "core.h"
 #include "object.h"
 #include "arcball.h"
-#include "timer.h"
 
 class Controller {
 public:
@@ -48,7 +47,8 @@ private:
 	int _activeObj;
 
 	void _ComputeFPS();
-	Timer _timer;
+	double _startTime;
+	double _stopTime;
 	double _elapsedTime;
 	int _numOfFrame;
 	double _fps;

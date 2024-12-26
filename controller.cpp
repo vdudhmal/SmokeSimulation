@@ -103,7 +103,7 @@ void Controller::InitCamera()
 #endif
 
 	glfwGetWindowSize(_windowHandle, &_winX, &_winY);
-	_FOV = 45.0f;
+	_FOV = 60.0f;
 	_aspect = (GLfloat)_winX / _winY;
 	_nearClip = 0.1f;
 	_farClip = 100.0f;
@@ -179,8 +179,9 @@ void Controller::Reset() {
 void Controller::_ComputeFPS()
 {
 	_numOfFrame++;
-	_elapsedTime += _timer.StopTimer();
-	_timer.StartTimer();
+	_stopTime = glfwGetTime();
+	_elapsedTime += (_stopTime - _startTime);
+	_startTime = glfwGetTime();
 	if(_elapsedTime > 1) {
 		_fps = _numOfFrame / _elapsedTime;
 		//std::cout << _fps  << " "<< _numOfFrame << std::endl;
