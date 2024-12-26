@@ -36,8 +36,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "event_listener.h"
-
 //#include <OpenMesh/Core/IO/MeshIO.hh>
 //#include <OpenMesh/Core/Mesh/PolyMesh_ArrayKernelT.hh>
 //#include <OpenMesh/Core/Mesh/TriMesh_ArrayKernelT.hh>
