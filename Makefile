@@ -10,10 +10,13 @@ endif
 
 #CXXFLAGS += -DENABLE_WRITE_FILE
 
+# Add the Eigen include path
+CXXFLAGS += -I/usr/include/eigen3
+
 LIBS_PATH = -L/usr/local/lib/OpenMesh
 LIBS_PATH += -L/usr/local/lib
 
-LIBS = -lGLEW -lGL -lGLU -lglfw3 -lX11  -lXrandr -lpthread -lXi
+LIBS = -lGLEW -lGL -lGLU -lglfw -lX11  -lXrandr -lpthread -lXi
 LIBS += -lOpenMeshCore -lOpenMeshTools
 
 SRC := $(shell find . -name "*.cpp")

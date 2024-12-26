@@ -55,7 +55,7 @@ void Camera::Reset()
 {
 
 	glfwGetWindowSize(_windowHandle, &_winX, &_winY);
-	_FOV = 60.0f;
+	_FOV = 45.0f;
 	_aspect = (GLfloat)_winX / _winY;
 	_nearClip = 0.1f;
 	_farClip = 100.0f;
