@@ -4,7 +4,6 @@
 #include "core.h"
 #include "object.h"
 #include "arcball.h"
-#include "camera.h"
 #include "timer.h"
 
 class Controller {
@@ -48,13 +47,17 @@ private:
 	int _maxObjectNo;
 	int _activeObj;
 
-	Camera* _camera;
-
 	void _ComputeFPS();
 	Timer _timer;
 	double _elapsedTime;
 	int _numOfFrame;
 	double _fps;
+
+	// Perspective controls
+	GLfloat _FOV;		// Field of View Angle
+	GLfloat _aspect;	// Aspect Ratio
+	GLfloat _nearClip;	// Near clipping plane distance
+	GLfloat _farClip;	// Far clipping plane distance
 };
 
 #endif

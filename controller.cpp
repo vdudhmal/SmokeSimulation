@@ -98,7 +98,30 @@ Controller::Controller(int argc,char **argv, const char *windowName)
 
 void Controller::InitCamera()
 {
-	_camera = new Camera(_windowHandle);
+	#ifdef DEBUG_LEVEL
+	std::cout << __FILE__ << " " << __FUNCTION__ << std::endl;
+#endif
+
+	glfwGetWindowSize(_windowHandle, &_winX, &_winY);
+	_FOV = 45.0f;
+	_aspect = (GLfloat)_winX / _winY;
+	_nearClip = 0.1f;
+	_farClip = 100.0f;
+
+#if 1
+	glEnable(GL_DEPTH_TEST);
+#else
+	glDisable(GL_DEPTH_TEST);
+#endif
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	// Set perspective projection
+	gluPerspective(_FOV, _aspect, _nearClip, _farClip);
+
+	glViewport(0, 0, _winX, _winY);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Controller::BeginLoop()
@@ -128,7 +151,26 @@ void Controller::Reset() {
 #ifdef DEBUG_LEVEL
 	std::cout << __FILE__ << " " << __FUNCTION__ << std::endl;
 #endif
-	_camera->Reset();
+	glfwGetWindowSize(_windowHandle, &_winX, &_winY);
+	_FOV = 45.0f;
+	_aspect = (GLfloat)_winX / _winY;
+	_nearClip = 0.1f;
+	_farClip = 100.0f;
+
+#if 1
+	glEnable(GL_DEPTH_TEST);
+#else
+	glDisable(GL_DEPTH_TEST);
+#endif
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	// Set perspective projection
+	gluPerspective(_FOV, _aspect, _nearClip, _farClip);
+
+	glViewport(0, 0, _winX, _winY);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for(int i = 0 ; i < _objectNo ; i++)
 		_objects[i]->Reset();
@@ -162,7 +204,26 @@ void Controller::Render() {
 
 
 	//Begin drawing scene
-	_camera->Reset();
+	glfwGetWindowSize(_windowHandle, &_winX, &_winY);
+	_FOV = 45.0f;
+	_aspect = (GLfloat)_winX / _winY;
+	_nearClip = 0.1f;
+	_farClip = 100.0f;
+
+#if 1
+	glEnable(GL_DEPTH_TEST);
+#else
+	glDisable(GL_DEPTH_TEST);
+#endif
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	// Set perspective projection
+	gluPerspective(_FOV, _aspect, _nearClip, _farClip);
+
+	glViewport(0, 0, _winX, _winY);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	for(int i = 0 ; i < _objectNo ; i++) {
 		_objects[i]->SimulateStep();
 		_objects[i]->Show();
