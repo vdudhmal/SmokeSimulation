@@ -20,7 +20,7 @@
 	
 	double _prevCursorX, _prevCursorY;
 
-	Object* _object;
+	Fluid* _object;
 	double _startTime;
 	double _stopTime;
 	double _elapsedTime;
@@ -150,8 +150,6 @@ int main(int argc, char **argv) {
 	_winX = 1280;
 	_winY = 960;
 
-	_object = new Object;
-
 	_isCtrlPressed = _isLeftKeyPressed = _isMiddleKeyPressed = _isRightKeyPressed = false;
 	_isLightOn = true;
 	_prevCursorX = _prevCursorY = 0;
@@ -187,20 +185,11 @@ int main(int argc, char **argv) {
 		exit(-1);
 	}
 
-	Object* object = new Fluid;
+	Fluid* object = new Fluid;
 
-#if 0
-	//enable shader
-	object->RegisterShader(VERTEX_PROG_NAME1, GL_VERTEX_SHADER);
-	object->RegisterShader(FRAGMENT_PROG_NAME1, GL_FRAGMENT_SHADER);
-	object->RegisterShader(VERTEX_PROG_NAME2, GL_VERTEX_SHADER);
-	object->RegisterShader(FRAGMENT_PROG_NAME2, GL_FRAGMENT_SHADER);
-	object->EnableShader();
-#endif
-
-		#ifdef DEBUG_LEVEL
+	#ifdef DEBUG_LEVEL
 	std::cout << __FILE__ << " " << __FUNCTION__ << std::endl;
-#endif
+	#endif
 
 	glfwGetWindowSize(_windowHandle, &_winX, &_winY);
 	_FOV = 60.0f;

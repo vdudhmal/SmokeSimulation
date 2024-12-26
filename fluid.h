@@ -2,7 +2,7 @@
 #define _FLUID_H
 
 #include "core.h"
-#include "object.h"
+#include "arcball.h"
 #include "renderer.h"
 
 #define DT  0.1				// time step
@@ -25,7 +25,7 @@
 
 class Renderer;
 
-class Fluid: public Object
+class Fluid
 {
 protected:
 	float _buffers[10][SIZE];
@@ -43,6 +43,17 @@ protected:
 	bool _isRendering;
 	bool _isDrawSliceOutline;
 
+	GLfloat _rotX;
+	GLfloat _rotY;
+	GLfloat _depth;
+
+	//for event handling
+	bool _isLeftKeyPressed, _isCtrlPressed, _isRightKeyPressed, _isMiddleKeyPressed;
+
+	Arcball _arcball;
+
+	GLFWwindow* _windowHandle;
+	int _winX, _winY;
 protected:
 	// simulation methods
 	// beware: i changed stam's implementation from a destiation, source ordering
@@ -63,10 +74,6 @@ protected:
 	void ClearSources(void);
 
 	void GenerateSmoke();
-
-	virtual void MouseButton(GLFWwindow *window, int button,int action,int mods);
-	virtual void MouseMotion(GLFWwindow *window, double nx, double ny);
-	virtual void Keyboard(GLFWwindow * window, int key, int scancode, int action, int mods);
 	bool LightSelected(double mouseX, double mouseY);
 
 public:
@@ -79,6 +86,15 @@ public:
 	virtual void SimulateStep();
 	virtual void Show();
 	const float* GetDensity();
+
+	virtual void MouseButton(GLFWwindow *window, int button,int action,int mods);
+	virtual void MouseMotion(GLFWwindow *window, double nx, double ny);
+	virtual void Keyboard(GLFWwindow * window, int key, int scancode, int action, int mods);
+
+	virtual void Reset();
+	virtual void Resize(GLFWwindow *window, int x, int y);
+	virtual void MouseScroll(GLFWwindow *window, double nx, double ny);
+	void RegisterParentWindow(GLFWwindow* windowHandle);
 };
 
 #endif

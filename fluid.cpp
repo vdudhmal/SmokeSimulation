@@ -413,3 +413,45 @@ void Fluid::ClearSources(void)
 	}
 }
 
+void Fluid::Reset() {
+#ifdef DEBUG_LEVEL
+	std::cout << __FILE__ << " " << __FUNCTION__ << std::endl;
+#endif
+	int width, height;
+	glfwGetWindowSize(_windowHandle, &width, &height);
+	_winX = width;
+	_winY = height;
+	_arcball.SetWidthHeight(width, height);
+
+#if 1
+	_depth = 3.8;
+	_rotX = 10;
+	_rotY = -20;
+
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	glTranslatef(0, 0, -_depth);
+	glRotatef(_rotX, 1, 0, 0);
+	glRotatef(_rotY, 0, 1, 0);
+#endif
+}
+
+void Fluid::RegisterParentWindow(GLFWwindow* windowHandle)
+{
+	_windowHandle = windowHandle;
+}
+
+void Fluid::Resize(GLFWwindow* windowHandle, int x, int y)
+{
+	_arcball.SetWidthHeight(x, y);
+}
+
+void Fluid::MouseScroll(GLFWwindow *window, double nx, double ny)
+{
+	_arcball.StartZooming(0, 0);
+	_arcball.UpdateZooming(-ny, nx);
+	_arcball.StopZooming();
+}
+
