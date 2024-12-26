@@ -8,7 +8,6 @@ public:
 	Camera(GLFWwindow* windowHandle);
 
 	void Reset();
-	void SetLight();
 	void RegisterParentWindow(GLFWwindow* windowHandle);
 
 	

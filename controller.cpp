@@ -94,8 +94,6 @@ Controller::Controller(int argc,char **argv, const char *windowName)
 		std::cerr << "glewInit() failed!" << std::endl;
 		exit(-1);
 	}
-
-	//InitCamera();
 }
 
 void Controller::InitCamera()
